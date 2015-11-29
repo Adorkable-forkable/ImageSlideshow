@@ -47,6 +47,17 @@ public class ImageSlideshow: UIView, UIScrollViewDelegate {
     public let scrollView = UIScrollView()
     public let pageControl = UIPageControl()
     
+    @IBInspectable public var pageIndicatorTintColor: UIColor? {
+        didSet {
+            pageControl.pageIndicatorTintColor = pageIndicatorTintColor
+        }
+    }
+    @IBInspectable public var currentPageIndicatorTintColor: UIColor? {
+        didSet {
+            pageControl.currentPageIndicatorTintColor = currentPageIndicatorTintColor
+        }
+    }
+    
     // state properties
     
     public var pageControlPosition = PageControlPosition.InsideScrollView {
@@ -132,6 +143,14 @@ public class ImageSlideshow: UIView, UIScrollViewDelegate {
         pageControl.hidden = pageControlPosition == .Hidden
         pageControl.frame = CGRectMake(0, 0, self.frame.size.width, 10)
         pageControl.center = CGPointMake(self.frame.size.width / 2, self.frame.size.height - 12.0)
+        
+        // TODO: find more appropriate place for this
+        if let pageIndicatorTintColor = pageIndicatorTintColor {
+            pageControl.pageIndicatorTintColor = pageIndicatorTintColor
+        }
+        if let currentPageIndicatorTintColor = currentPageIndicatorTintColor {
+            pageControl.currentPageIndicatorTintColor = currentPageIndicatorTintColor
+        }
         
         layoutScrollView()
     }
